@@ -43,11 +43,9 @@ public class PutTest {
         HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
         Assert.assertEquals(response.statusCode(), 200);
         JsonNode jsonNode = Json.parseString(response.body()).get(0);
-        System.out.println(jsonNode.toString());
         String query = "{\"status\":" + (
                 jsonNode.get("status").toString().equals("\"active\"") ?
                         "\"inactive\"" : "\"active\"") + "}";
-        System.out.println(query);
         httpRequest = HttpRequest.newBuilder(URI.create(url + jsonNode.get("id"))).header("Authorization", "Bearer "
                         + R.readToken()).headers("Content-Type", "application/json").PUT(
                         HttpRequest.BodyPublishers.ofString(
