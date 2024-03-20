@@ -24,4 +24,14 @@ public class R {
             throw new RuntimeException(e);
         }
     }
+
+    public static String getGraphQLUrl() {
+        Properties properties = new Properties();
+        try {
+            properties.load(new FileInputStream("src/main/resources/test_data.properties"));
+            return (String) properties.get("graph_url");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
