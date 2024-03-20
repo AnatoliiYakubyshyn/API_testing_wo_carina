@@ -34,4 +34,12 @@ public class GetTest {
             Assert.assertEquals(response.statusCode(), 404);
         }
     }
+
+    @Test
+    public void testUnavailableUser() throws IOException, InterruptedException {
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest httpRequest = HttpRequest.newBuilder(URI.create(R.getRestUrl() + "67777440")).GET().build();
+        HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+        Assert.assertEquals(response.statusCode(), 404);
+    }
 }
