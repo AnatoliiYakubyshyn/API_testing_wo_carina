@@ -3,12 +3,13 @@ package com.solvd.apitest.rest.user;
 import java.io.IOException;
 import java.net.http.HttpResponse;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.solvd.apitest.Json;
-import com.solvd.apitest.enums.HTTP_METHOD;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.solvd.apitest.Json;
+import com.solvd.apitest.enums.HTTP_METHOD;
 import com.solvd.apitest.R;
 import com.solvd.apitest.RequestService;
 
