@@ -17,8 +17,8 @@ public class DeleteTest {
     @Test
     private void testCreatedUserIsDeleted() throws IOException, InterruptedException {
         String body = "{\n" +
-                "\"name\":\"Frederic Federo\",\n" +
-                "\"email\":\"frederik_federo@dom.example\",\n" +
+                "\"name\":\"Federic Federo\",\n" +
+                "\"email\":\"federik_federo@dom.example\",\n" +
                 "\"gender\":\"male\",\n" +
                 "\"status\":\"inactive\"\n" +
                 "} ";
@@ -31,8 +31,7 @@ public class DeleteTest {
         boolean f = false;
         String id = "";
         for (int i = 0; i < jsonNode.size(); i++) {
-            System.out.println(jsonNode.get(i).get("name").toString());
-            if (jsonNode.get(i).get("name").toString().equals("Frederic Federo")) {
+            if (jsonNode.get(i).get("name").toString().equals("\"Federic Federo\"")) {
                 f = true;
                 id = jsonNode.get(i).get("id").toString();
                 break;

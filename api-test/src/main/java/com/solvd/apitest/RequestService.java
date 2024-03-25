@@ -17,7 +17,7 @@ public class RequestService {
         HttpRequest httpRequest = null;
         if (withAuth) {
             httpRequest = HttpRequest.newBuilder(URI.create(url)).GET().header("Authorization", "Bearer "
-                    + R.readToken()).build();
+                    + R.readToken()).headers("Content-Type", "application/json").build();
         } else {
             httpRequest = HttpRequest.newBuilder(URI.create(url)).GET().build();
         }
