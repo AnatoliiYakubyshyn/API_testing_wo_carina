@@ -32,7 +32,6 @@ public class GetTest {
     @Test
     public void testUnavailableUser() throws IOException, InterruptedException {
         HttpResponse<String> response = RequestService.getRequestWithNoBody(R.getRestUrl() + "67777440", false);
-        ;
         Assert.assertEquals(response.statusCode(), 404);
     }
 }
