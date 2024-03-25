@@ -6,7 +6,6 @@ import java.net.http.HttpResponse;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.solvd.apitest.Json;
 import com.solvd.apitest.enums.HTTP_METHOD;
@@ -41,5 +40,17 @@ public class DeleteTest {
         Assert.assertTrue(f, "No such person. Data is not saved");
         response = RequestService.delete(R.getRestUrl() + id, true);
         Assert.assertTrue(response.statusCode() == 200 || response.statusCode() == 204);
+    }
+
+    @Test
+    public void testDeleteNotExistingUser() throws IOException, InterruptedException {
+        HttpResponse<String> response = RequestService.delete(R.getRestUrl() + 67777440, true);
+        Assert.assertEquals(response.statusCode(), 404);
+    }
+
+    @Test
+    public void testDeleteWithoutAuth() throws IOException, InterruptedException {
+        HttpResponse<String> response = RequestService.delete(R.getRestUrl() + 6777744, false);
+        Assert.assertTrue(response.statusCode() == 401 || response.statusCode() == 404);
     }
 }
