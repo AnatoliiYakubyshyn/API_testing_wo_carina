@@ -3,6 +3,7 @@ package com.solvd.apitest.rest.user;
 import java.io.IOException;
 import java.net.http.HttpResponse;
 
+import com.solvd.apitest.TemplateJsonService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -11,6 +12,8 @@ import com.solvd.apitest.RequestService;
 import com.solvd.apitest.R;
 
 public class GetTest {
+
+    private final String path = "src/test/resources/response.json";
 
     @Test
     public void testPublicUser() throws IOException, InterruptedException {
@@ -23,7 +26,8 @@ public class GetTest {
         HttpResponse<String> response = RequestService.getRequestWithNoBody(R.getRestUrl() + "6777744", false);
         if (response.statusCode() == 200) {
             Assert.assertEquals(Json.parseString(response.body()),
-                    Json.parseString("\"id\":6777744,\"name\":\"Divya Jha\",\"email\":\"divya_jha@corkery.example\",\"gender\":\"male\",\"status\":\"active\"}"));
+                    Json.parseString(TemplateJsonService.readAndFillTemplate(path, 6777744, "Divya Jha",
+                            "divya_jha@corkery.example", "male", "active")));
         } else {
             Assert.assertEquals(response.statusCode(), 404);
         }

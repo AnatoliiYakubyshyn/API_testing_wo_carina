@@ -5,6 +5,7 @@ import java.net.http.HttpResponse;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.solvd.apitest.Json;
+import com.solvd.apitest.TemplateJsonService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -14,12 +15,12 @@ import com.solvd.apitest.enums.HTTP_METHOD;
 
 public class PostTest {
 
+    private final String postTemplateFile = "src/test/resources/post.json";
+
     @Test
     public void testPostUser() throws IOException, InterruptedException {
-        String body = "{\"name\": \"Marty McFly\",\n" +
-                "\"email\": \"marty@gmail.com\",\n" +
-                "\"gender\": \"male\",\n" +
-                "\"status\": \"active\"}";
+        String body = TemplateJsonService.readAndFillTemplate(postTemplateFile,"Marty McFly",
+                "marty@gmail.com","male","active");
         HttpResponse<String> response = RequestService.changeRequest(R.getRestUrl(), body, HTTP_METHOD.POST,
                 true);
         Assert.assertTrue(response.statusCode() == 200 || response.statusCode() == 201, String.valueOf(

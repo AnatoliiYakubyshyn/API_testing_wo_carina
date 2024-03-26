@@ -3,6 +3,7 @@ package com.solvd.apitest.rest.user;
 import java.io.IOException;
 import java.net.http.HttpResponse;
 
+import com.solvd.apitest.TemplateJsonService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -16,12 +17,8 @@ public class DeleteTest {
 
     @Test
     private void testCreatedUserIsDeleted() throws IOException, InterruptedException {
-        String body = "{\n" +
-                "\"name\":\"Federic Federo\",\n" +
-                "\"email\":\"federik_federo@dom.example\",\n" +
-                "\"gender\":\"male\",\n" +
-                "\"status\":\"inactive\"\n" +
-                "} ";
+        String body = TemplateJsonService.readAndFillTemplate("src/test/resources/post.json","Federic Federo",
+                "federik_federo@dom.example","male","inactive");
         HttpResponse<String> response = RequestService.changeRequest(R.getRestUrl(), body, HTTP_METHOD.POST,
                 true);
         Assert.assertEquals(response.statusCode(), 201);
