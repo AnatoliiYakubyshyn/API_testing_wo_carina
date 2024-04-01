@@ -18,7 +18,7 @@ public class GetTest {
     @Test
     public void testPublicUser() throws IOException, InterruptedException {
         HttpResponse<String> response = RequestService.getRequestWithNoBody(R.getRestUrl(), false);
-        Assert.assertEquals(response.statusCode(), 200);
+        Assert.assertEquals(response.statusCode(), 200,"Actual result: " +response.statusCode());
     }
 
     @Test
@@ -29,13 +29,13 @@ public class GetTest {
                     Json.parseString(TemplateJsonService.readAndFillTemplate(path, 6777744, "Divya Jha",
                             "divya_jha@corkery.example", "male", "active")));
         } else {
-            Assert.assertEquals(response.statusCode(), 404);
+            Assert.assertEquals(response.statusCode(), 404,"Actual result: " +response.statusCode());
         }
     }
 
     @Test
     public void testUnavailableUser() throws IOException, InterruptedException {
         HttpResponse<String> response = RequestService.getRequestWithNoBody(R.getRestUrl() + "67777440", false);
-        Assert.assertEquals(response.statusCode(), 404);
+        Assert.assertEquals(response.statusCode(), 404,"Actual result: " +response.statusCode());
     }
 }

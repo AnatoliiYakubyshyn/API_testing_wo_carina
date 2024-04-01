@@ -25,13 +25,18 @@ public class RequestService {
         return httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
     }
 
+    private static HttpRequest.Builder addAuthorizationHeader(HttpRequest.Builder builder) {
+        builder.header("Authorization", "Bearer "
+                + R.readToken());
+        return builder;
+    }
+
     public static HttpResponse<String> changeRequest(String url, String body, HTTP_METHOD httpChangeMethod, boolean withAuth) throws IOException, InterruptedException {
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest httpRequest = null;
         HttpRequest.Builder builder = HttpRequest.newBuilder(URI.create(url));
         if (withAuth) {
-            builder.header("Authorization", "Bearer "
-                    + R.readToken());
+            addAuthorizationHeader(builder);
         }
         builder.headers("Content-Type", "application/json");
         switch (httpChangeMethod) {
@@ -49,8 +54,7 @@ public class RequestService {
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest httpRequest = null;
         if (withAuth) {
-            httpRequest = HttpRequest.newBuilder(URI.create(url)).DELETE().header("Authorization", "Bearer "
-                    + R.readToken()).build();
+            httpRequest = addAuthorizationHeader(HttpRequest.newBuilder(URI.create(url)).DELETE()).build();
         } else {
             httpRequest = HttpRequest.newBuilder(URI.create(url)).DELETE().build();
         }

@@ -26,7 +26,7 @@ public class PutTest {
                 "chandak_gandhi@durgan.test","chandak_gandhi@durgan.test","female","active");
         HttpResponse<String> response = RequestService.changeRequest(url + "6777736", query, HTTP_METHOD.PUT,
                 false);
-        Assert.assertTrue(response.statusCode() == 401 || response.statusCode() == 404);
+        Assert.assertTrue(response.statusCode() == 401 || response.statusCode() == 404,"Actual result: " +response.statusCode());
     }
 
     @Test
@@ -40,6 +40,6 @@ public class PutTest {
                         "inactive" : "active" );
         response = RequestService.changeRequest(url+jsonNode.get("id"), query, HTTP_METHOD.PUT, true);
         Assert.assertTrue(response.statusCode() >= 200 && response.statusCode() <= 299,
-                "response is not 200 - 299 " + response.statusCode());
+                "response is not 200 - 299 :" + response.statusCode());
     }
 }
