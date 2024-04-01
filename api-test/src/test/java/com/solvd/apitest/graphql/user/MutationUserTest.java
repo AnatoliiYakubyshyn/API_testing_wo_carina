@@ -20,7 +20,6 @@ public class MutationUserTest {
                 "dssfjksfj","Tolia","wewewe@gmail.com","male","active");
         HttpResponse<String> response = RequestService.changeRequest(R.getGraphQLUrl(),
                body, HTTP_METHOD.POST, true);
-        System.out.println(response.body());
         JsonNode jsonNode = Json.parseString(response.body());
         Assert.assertNotNull(jsonNode.get("errors"), response.body());
     }
