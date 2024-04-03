@@ -1,0 +1,2 @@
+{"query": "{users(first: %d) {edges {node {id}}}}"
+}
